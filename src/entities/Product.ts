@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToMany, JoinTable } from "typeorm";
+import Cart from "./Cart";
 
 @Entity('products')
 class Product {
@@ -22,6 +23,10 @@ class Product {
 
     @Column()
     amount_in_stock!: number
+
+    @ManyToMany(() => Cart)
+    @JoinTable()
+    cart!: Cart[]
 
     constructor() {
         this.created_at = new Date();

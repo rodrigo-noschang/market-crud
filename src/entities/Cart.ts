@@ -1,14 +1,15 @@
-import { Entity, PrimaryGeneratedColumn, ManyToMany, JoinTable } from "typeorm";
-import Product from "./Product";
+import { Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { User } from ".";
 
 @Entity('carts')
 class Cart {
     @PrimaryGeneratedColumn('uuid')
     id!: string
 
-    @ManyToMany(() => Product)
-    @JoinTable()
-    products!: Product[]
+    @OneToOne(type => User)
+    @JoinColumn()
+    user!: User
+
 }
 
 export default Cart;

@@ -25,10 +25,6 @@ class User {
     @Column()
     updated_at!: Date
 
-    @OneToOne(type => Cart)
-    @JoinColumn()
-    user_cart!: Cart
-
     constructor() {
         this.created_at = new Date();
         this.updated_at = new Date();

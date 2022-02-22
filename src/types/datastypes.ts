@@ -19,3 +19,26 @@ export interface IUserLoginData {
     email: string,
     password: string
 }
+
+export interface IProductRequest {
+    product_name: string
+    product_description: string
+    price: number
+    amount_in_stock: number
+}
+
+export interface IProductDB {
+    product_id: string
+    product_name: string
+    product_description: string
+    created_at: Date
+    updated_at: Date
+    price: number
+    amount_in_stock: number
+    cart?: Cart[]
+}
+
+interface Cart {
+    id: string
+    user: IUserDB
+}

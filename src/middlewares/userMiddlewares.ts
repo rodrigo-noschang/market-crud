@@ -30,7 +30,7 @@ export const isUserAdmin = async (req: Request, res: Response, next: NextFunctio
             id: req.body.userId
         }
     })
-
+    console.log(user);
     req.body.isAdmin = user?.is_admin;
     next();
 }

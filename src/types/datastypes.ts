@@ -1,10 +1,21 @@
-export interface IUser{
+export interface IUserRequest{
     user_name: string
     user_email: string
+    user_password: string
     is_admin: boolean
-    cart: ICart
 }
 
-interface ICart {
-    cart_id: string
+export interface IUserDB{
+    id: string
+    user_name: string
+    user_email: string
+    user_password: string
+    is_admin: boolean
+    created_at: Date
+    updated_at: Date
+}
+
+export interface IUserLoginData {
+    email: string,
+    password: string
 }

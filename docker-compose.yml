@@ -11,6 +11,8 @@ services:
       - PG_DB=kenzie_market
       - PG_USER=postgres
       - PG_HOST=db
+      - SECRET=JWT_SPECIAL_SECRET
+      - EXPIRES_IN=1h
     volumes:
       - .:/code
       

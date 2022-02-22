@@ -24,7 +24,6 @@ export interface IProductRequest {
     product_name: string
     product_description: string
     price: number
-    amount_in_stock: number
 }
 
 export interface IProductDB {
@@ -34,8 +33,6 @@ export interface IProductDB {
     created_at: Date
     updated_at: Date
     price: number
-    amount_in_stock: number
-    cart?: Cart[]
 }
 
 interface Cart {

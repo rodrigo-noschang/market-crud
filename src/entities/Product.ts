@@ -21,13 +21,6 @@ class Product {
     @Column()
     price!: number
 
-    @Column()
-    amount_in_stock!: number
-
-    @ManyToMany(() => Cart)
-    @JoinTable()
-    cart!: Cart[]
-
     constructor() {
         this.created_at = new Date();
         this.updated_at = new Date();

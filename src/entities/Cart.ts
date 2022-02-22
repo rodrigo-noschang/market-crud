@@ -1,5 +1,5 @@
-import { Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { User } from ".";
+import { Entity, JoinColumn, JoinTable, ManyToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Product, User } from ".";
 
 @Entity('carts')
 class Cart {
@@ -9,6 +9,10 @@ class Cart {
     @OneToOne(type => User)
     @JoinColumn()
     user!: User
+
+    @ManyToMany(type => Product, {eager: true})
+    @JoinTable()
+    products!: Product[]
 
 }
 

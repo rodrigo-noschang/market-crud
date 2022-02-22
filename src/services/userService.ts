@@ -3,11 +3,13 @@ import { User } from "../entities";
 import { IUserRequest, IUserLoginData, IUserDB } from "../types/datastypes";
 import * as bcrypt from 'bcryptjs';
 import  jwt from 'jsonwebtoken';
+import { createCart } from "../controller/cart.controller";
 
 export const createUserService = async (newUserData: IUserRequest) => {
     const userRepository = getRepository(User);
     const newUser = userRepository.create(newUserData);
     await userRepository.save(newUser);
+    await createCart(newUser);
 
     return newUser;
 }

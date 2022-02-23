@@ -39,12 +39,6 @@ export const getCartByUserId = async (req: Request, res: Response, next: NextFun
     const { userId } = req.body; // Id que vem do authenticate
     const user = await getUserInfoService(userId); // Pega o user
 
-    const cartRepository = getRepository(Cart);
-    const cart = await cartRepository.findOne({
-        where:{
-            user: user
-        }
-    })
-    req.body.cartId = cart?.id;
+    req.body.cartId = user?.cart.id;
     next();
 }

@@ -6,10 +6,6 @@ class Cart {
     @PrimaryGeneratedColumn('uuid')
     id!: string
 
-    @OneToOne(type => User)
-    @JoinColumn()
-    user!: User
-
     @ManyToMany(type => Product, {eager: true})
     @JoinTable()
     products!: Product[]

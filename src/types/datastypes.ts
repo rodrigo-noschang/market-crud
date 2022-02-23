@@ -13,6 +13,7 @@ export interface IUserDB{
     is_admin: boolean
     created_at: Date
     updated_at: Date
+    cart: Cart
 }
 
 export interface IUserLoginData {
@@ -37,5 +38,5 @@ export interface IProductDB {
 
 interface Cart {
     id: string
-    user: IUserDB
+    products: IProductDB[]
 }

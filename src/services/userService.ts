@@ -6,10 +6,11 @@ import  jwt from 'jsonwebtoken';
 import { createCart } from "../controller/cart.controller";
 
 export const createUserService = async (newUserData: IUserRequest) => {
+    const newCart = await createCart();
     const userRepository = getRepository(User);
     const newUser = userRepository.create(newUserData);
+    newUser.cart = newCart;
     await userRepository.save(newUser);
-    await createCart(newUser);
 
     return newUser;
 }

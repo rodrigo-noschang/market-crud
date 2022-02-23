@@ -1,13 +1,10 @@
 import { getRepository } from "typeorm"
-import { Cart, Product } from "../entities"
-import { IUserDB } from "../types/datastypes";
+import { Cart, Product, User } from "../entities"
+import { IUserDB, IProductDB } from "../types/datastypes";
 
-export const createCartService = async (user: IUserDB) => {
-    const cartData = {
-        user: user
-    }
+export const createCartService = async () => {
     const cartRepository = getRepository(Cart);
-    const newCart = cartRepository.create(cartData);
+    const newCart = cartRepository.create();
     await cartRepository.save(newCart);
     return newCart;
 }
@@ -49,4 +46,23 @@ export const getCartByIdServices = async (cartId: string) => {
         }
     })
     return cart;
+}
+
+export const removeProductFromCartServices = async (productId: string, userId: string) => {
+    const userRepository = getRepository(User);
+    const cartRepository = getRepository(Cart);
+    const user = await userRepository.findOne({
+        where: {
+            id: userId
+        }
+    });
+    
+    if(user) {
+        user.cart.products = user?.cart.products.filter(product => product.product_id !== productId);
+        console.log(user.cart.products);
+        await userRepository.save(user);
+        await cartRepository.save(user.cart);
+    }
+
+    return user;
 }

@@ -1,5 +1,5 @@
-import { Entity, JoinColumn, JoinTable, ManyToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Product, User } from ".";
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Product } from ".";
 
 @Entity('carts')
 class Cart {
@@ -10,6 +10,12 @@ class Cart {
     @JoinTable()
     products!: Product[]
 
+    @Column()
+    finished!: boolean
+
+    constructor() {
+        this.finished = false;
+    }
 }
 
 export default Cart;

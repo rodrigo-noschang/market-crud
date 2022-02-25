@@ -1,9 +1,10 @@
 import { Request, Response } from "express"
-import { finishPurchaseServices, getAllPurchasedServices, getPurchaseByIdServices } from "../services/buyServices"
+import { assembleEmail, finishPurchaseServices, getAllPurchasedServices, getPurchaseByIdServices } from "../services/buyServices"
 
 export const finishPurchase = async (req: Request, res: Response) => {
-    const updatedCart = await finishPurchaseServices(req.body.userId);
-    return res.json({data: updatedCart});
+    const updatedCartUser = await finishPurchaseServices(req.body.userId);
+    assembleEmail(updatedCartUser);
+    return res.json({data: updatedCartUser});
 }
 
 export const getPurchaseById = async (req: Request, res: Response) => {

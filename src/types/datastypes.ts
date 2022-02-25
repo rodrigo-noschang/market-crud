@@ -39,4 +39,17 @@ export interface IProductDB {
 interface Cart {
     id: string
     products: IProductDB[]
+    finished: boolean
+}
+
+export interface ICartDB {
+    id: string,
+    products: IProductDB[]
+    finished: boolean
+}
+
+export interface CartList {
+    name: string
+    description: string
+    price: number
 }

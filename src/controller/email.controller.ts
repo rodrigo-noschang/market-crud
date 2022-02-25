@@ -20,7 +20,7 @@ export const recoverPassword = async (req: Request, res: Response) => {
     const newCode = codeRepository.create(newCodeData);
     await codeRepository.save(newCode);
     
-    const message = `Seu código para alteração de senha è ${newCode.recoveryCode}`;
+    const message = `Seu código para alteração de senha è ${newCode.randomCode}`;
     sendAnyEmail(thisUser?.user_email, "Código de recuperação", message);
     return res.json({"message": `recovery code was sent to ${thisUser?.user_email}`})
 }

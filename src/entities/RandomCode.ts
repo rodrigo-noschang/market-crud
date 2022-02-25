@@ -7,7 +7,7 @@ class RandomCode {
     id!: number
 
     @Column()
-    randomCode!: string
+    recoveryCode!: string
 
     @OneToOne(type => User)
     @JoinColumn()
@@ -19,7 +19,7 @@ class RandomCode {
         for(let i = 0; i < 7; i ++){
             randomCodeString += Math.floor(Math.random() * 9)        
         }
-        this.randomCode = randomCodeString;
+        this.recoveryCode = randomCodeString;
     }
 }
 

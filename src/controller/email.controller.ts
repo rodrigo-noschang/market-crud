@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import { getRepository } from "typeorm";
 import { User } from "../entities";
-import RandomCode from "../entities/Code";
+import RandomCode from "../entities/RandomCode";
 import { sendAnyEmail } from "../services/emailServices";
 import { getUserInfoService } from "../services/userService";
 import * as bcrypt from 'bcryptjs';
@@ -20,7 +20,7 @@ export const recoverPassword = async (req: Request, res: Response) => {
     const newCode = codeRepository.create(newCodeData);
     await codeRepository.save(newCode);
     
-    const message = `Seu código para alteração de senha è ${newCode.randomCode}`;
+    const message = `Seu código para alteração de senha è ${newCode.recoveryCode}`;
     sendAnyEmail(thisUser?.user_email, "Código de recuperação", message);
     return res.json({"message": `recovery code was sent to ${thisUser?.user_email}`})
 }

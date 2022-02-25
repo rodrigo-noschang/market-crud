@@ -1,9 +1,9 @@
 import { Request, Response } from "express"
-import { assembleEmail, finishPurchaseServices, getAllPurchasedServices, getPurchaseByIdServices } from "../services/buyServices"
+import { finishPurchaseEmail, finishPurchaseServices, getAllPurchasedServices, getPurchaseByIdServices } from "../services/buyServices"
 
 export const finishPurchase = async (req: Request, res: Response) => {
     const updatedCartUser = await finishPurchaseServices(req.body.userId);
-    assembleEmail(updatedCartUser);
+    finishPurchaseEmail(updatedCartUser);
     return res.json({data: updatedCartUser});
 }
 

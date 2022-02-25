@@ -1,31 +1,16 @@
 import { getRepository } from "typeorm"
 import { Cart, User } from "../entities"
 import { CartList, ICartDB, IUserDB } from "../types/datastypes"
-import { transporter } from "./mailer"
+import { sendAnyEmail } from "../services/emailServices";
 
-export const assembleEmail = (user: IUserDB | undefined) => {
+export const finishPurchaseEmail = (user: IUserDB | undefined) => {
     const itemsList = getAllItemsFromCart(user?.cart);
     const totalPrice = getTotalPrice(itemsList);
     const itemsString = itemsList?.map(product => product.name.toLowerCase()).join(', ');
 
+    const emailString = `Sua compra na Kenzie Mart foi finalizada.\nVocê comprou os seguintes itens ${itemsString}.\nO valor total da compra foi de R$${totalPrice}.`
 
-    let mailOptions = {
-        from: "Kenzie Market", 
-        to: 'rodrigo.noschang1@gmail.com',  // user?.user_email, 
-        subject: 'Compra Finalizada',
-        text: 
-            `Você comprou os itens: ${itemsString}.\n 
-            O valor total da sua compra foi: R$ ${totalPrice?.toFixed(2)}`
-    };
-
-    transporter.sendMail(mailOptions, function (err, info) {
-        if(err) {
-            console.log(err);
-        } else {
-            console.log(info);
-        }
-    })
-
+    sendAnyEmail(user?.user_email, "Compra finalizada", emailString);
 }
 
 export const getAllItemsFromCart = (cart: ICartDB | undefined) => {
